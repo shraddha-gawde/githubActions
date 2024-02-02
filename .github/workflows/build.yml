@@ -5,6 +5,13 @@ jobs :
         steps :
               - run : node --version 
               - run : npm --version 
+      Second-job :
+        runs-on : ubuntu-latest
+        steps :
+              - run : node --version 
+              - run : npm --version 
+              - uses : actions/checkout@v4
+              - run : node index.js
 
 
 
