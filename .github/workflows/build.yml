@@ -1,35 +1,20 @@
-on : push
-jobs : 
-      first-job :
-        runs-on : ubuntu-latest
-        steps :
-              - run : node --version 
-              - run : npm --version 
-      Second-job :
-        runs-on : ubuntu-latest
-        steps :
-              - run : node --version 
-              - run : npm --version 
-              - uses : actions/checkout@v4
-              - run : node index.js
-      third-job :
-        runs-on : ubuntu-latest
-        steps :
-              - run : node --version 
-              - run : npm --version 
-              - uses : actions/checkout@v4
-              - run : npm ci
-              - run : npx eslint .
-              - run : node index.js
-              - run : node script.js
+name: Print Node.js Version
 
+on: [push, pull_request]
 
+jobs:
+  print-node-version:
+    runs-on: ubuntu-latest
 
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-# on : push
-# jobs : 
-#       first-job :
-#         runs-on : windows-latest, macos-latest
-#         steps :
-#               - run : node --version 
-#               - run : npm --version 
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'  # You can change this to the desired Node.js version
+
+    - name: Print Node.js version
+      run: |
+        node -v
